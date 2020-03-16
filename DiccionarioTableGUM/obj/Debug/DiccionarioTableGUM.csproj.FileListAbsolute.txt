@@ -1,0 +1,17 @@
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\bin\Debug\DiccionarioTableGUM.exe.config
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\bin\Debug\DiccionarioTableGUM.exe
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\bin\Debug\DiccionarioTableGUM.pdb
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\DiccionarioTableGUM.csprojAssemblyReference.cache
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\App.g.cs
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\DiccionarioTableGUM_MarkupCompile.cache
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\DiccionarioTableGUM_MarkupCompile.lref
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\DiccionarioTableGUM.g.resources
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\DiccionarioTableGUM.Properties.Resources.resources
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\DiccionarioTableGUM.csproj.GenerateResource.cache
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\DiccionarioTableGUM.csproj.CoreCompileInputs.cache
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\DiccionarioTableGUM.exe
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\DiccionarioTableGUM.pdb
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\Views\DiccionarioTablas.g.cs
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\Views\DiccionarioTablas.baml
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\Views\AdicionarTablas.g.cs
+C:\Users\johan.poveda\source\repos\DiccionarioTableGUM\DiccionarioTableGUM\obj\Debug\Views\AdicionarTablas.baml

@@ -1,0 +1,43 @@
+﻿<Window x:Class="DiccionarioTableGUM.Views.DiccionarioTablas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiccionarioTableGUM.Views"
+        mc:Ignorable="d"
+        Title="DiccionarioTablas" Height="450" Width="800">
+
+
+    <Grid   >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid  Grid.Row="0">
+            <Button Content="Validar cambios pendientes" Height="21" Margin="613,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.782,-1.369"/>
+        </Grid>
+
+        <Grid  Grid.Row="1" >
+            <DataGrid  x:Name="DgTablas" Margin="10,10,10,11" AutoGenerateColumns="False" Grid.ColumnSpan="3">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre tabla" Binding="{Binding Path=f1_nombre}" />
+                    <DataGridTextColumn Header="Descripcion" Binding="{Binding Path=f1_descripcion}" />
+                    <DataGridTextColumn Header="Notas" Binding="{Binding Path=f1_notas}"  Width="auto" />
+                    <DataGridCheckBoxColumn Header="Activo GUM" Binding="{Binding Path=f1_ind_proceso_gum}"  />
+                    <DataGridCheckBoxColumn Header="Con Cambio" Binding="{Binding Path=f1_ind_cambio}"  />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid>
+            <Button x:Name="btnAdiccionarTablas" Content="Adicionar Tabla" HorizontalAlignment="Left" Height="21" Margin="10,356,0,-329" Grid.Row="1" VerticalAlignment="Top" Width="126" Click="BtnAdiccionarTablas_Click"/>
+            <Button Content="Exportar" HorizontalAlignment="Left" Height="21" Margin="656,356,0,-327" Grid.Row="1" VerticalAlignment="Top" Width="126"/>
+        </Grid>
+        
+        
+
+    </Grid>
+
+</Window>
