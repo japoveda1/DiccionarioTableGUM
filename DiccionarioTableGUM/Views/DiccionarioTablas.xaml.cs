@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DiccionarioTableGUM.Models;
 
+
 namespace DiccionarioTableGUM.Views
 {
     /// <summary>
@@ -20,6 +22,7 @@ namespace DiccionarioTableGUM.Views
     /// </summary>
     public partial class DiccionarioTablas : Window
     {
+
         public DiccionarioTablas()
         {
 
@@ -29,18 +32,32 @@ namespace DiccionarioTableGUM.Views
 
         }
 
-        private void BtnAdiccionarTablas_Click(object sender, RoutedEventArgs e)
+        private void cmdAdiccionarTablas_Click(object sender, RoutedEventArgs e)
         {
-            AdicionarTablas vViewAdicionarTablas = new AdicionarTablas();
-
-            vViewAdicionarTablas.Show();
+            AdicionarTablas frmAdicionarTablas = new AdicionarTablas();
+            frmAdicionarTablas.Show();
         }
 
         private void CargarGrid()
-        {
+        {             
+           DiccionarioTablasModel vObjDiccionarioTablas = new DiccionarioTablasModel();
+           DgTablas.ItemsSource = vObjDiccionarioTablas.obtenerTablasGUM().DefaultView;
+        }
 
-            DiccionarioTablasModel vDiccionarioTablas = new DiccionarioTablasModel();
-            DgTablas.ItemsSource = vDiccionarioTablas.obtenerTablasGUM().DefaultView;
+           
+        private void CmdAdicionar_Click(object sender, RoutedEventArgs e)
+        {
+            DataView dtvTablasGUM = new DataView();
+            DiccionarioTablasModel vObjDiccionarioTablas = new DiccionarioTablasModel();
+
+            //Se obtienen los datos que fueron editados en la tabla principal
+            dtvTablasGUM = (DataView)DgTablas.ItemsSource;
+
+            vObjDiccionarioTablas.confirmarCambiosGUm(dtvTablasGUM.Table);
+
+            DgTablas.ItemsSource = null;
+            CargarGrid();
+
         }
     }
 }

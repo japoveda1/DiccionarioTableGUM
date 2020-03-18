@@ -12,18 +12,21 @@ namespace DiccionarioTableGUM.Models
     {
         public clsConexionDB pubConexionDB = new clsConexionDB();
 
-        public DataTable ObtenerTablasDelSistema()
+        public DataTable ObtenerTablasDB()
         {
             pubConexionDB.AbrirConexion();
-            DataSet vDsTablas;
+            DataSet vDsTablasDB;
 
-            vDsTablas = pubConexionDB.EjecutarCommand("sp_tablas_gum");
+            vDsTablasDB = pubConexionDB.EjecutarCommand("sp_dd_tablas_db");
 
             pubConexionDB.CerrarConexion();
 
-            return vDsTablas.Tables[0];
+            return vDsTablasDB.Tables[0];
 
         }
+
+
+
 
 
 

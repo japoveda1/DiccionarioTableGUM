@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DiccionarioTableGUM.Views"
         mc:Ignorable="d"
-        Title="AdicionarTablas" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="216*"/>
-            <RowDefinition Height="203*"/>
-        </Grid.RowDefinitions>
-        <DataGrid Margin="27,33,18,23" Grid.RowSpan="2"/>
+        Title="Adicionar Tablas" Height="450" Width="300">
+    <Grid Height="419" VerticalAlignment="Bottom" Margin="0,0,2,0">
+        <DataGrid x:Name="DgTablasDB" Margin="10,39,10,17" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{Binding Path=f_seleccion}"/>
+                <DataGridTextColumn Header="Nombre tablas" Binding="{Binding Path=f_nombre_tabla}" />
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

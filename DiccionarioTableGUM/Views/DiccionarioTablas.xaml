@@ -8,8 +8,7 @@
         Title="DiccionarioTablas" Height="450" Width="800">
 
 
-    <Grid   >
-
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto"/>
@@ -17,27 +16,25 @@
         </Grid.RowDefinitions>
 
         <Grid  Grid.Row="0">
-            <Button Content="Validar cambios pendientes" Height="21" Margin="613,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.782,-1.369"/>
+            <Button Content="Validar Cambios" Margin="603,10,10,22" RenderTransformOrigin="2.782,-1.369" Height="21" FontFamily="Avenir Light" FontSize="14" />
         </Grid>
 
         <Grid  Grid.Row="1" >
-            <DataGrid  x:Name="DgTablas" Margin="10,10,10,11" AutoGenerateColumns="False" Grid.ColumnSpan="3">
+            <DataGrid  x:Name="DgTablas" AutoGenerateColumns="False" CanUserAddRows="False" FontFamily="Avenir Light" FontSize="14" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nombre tabla" Binding="{Binding Path=f1_nombre}" />
-                    <DataGridTextColumn Header="Descripcion" Binding="{Binding Path=f1_descripcion}" />
-                    <DataGridTextColumn Header="Notas" Binding="{Binding Path=f1_notas}"  Width="auto" />
-                    <DataGridCheckBoxColumn Header="Activo GUM" Binding="{Binding Path=f1_ind_proceso_gum}"  />
-                    <DataGridCheckBoxColumn Header="Con Cambio" Binding="{Binding Path=f1_ind_cambio}"  />
+                    <DataGridTextColumn Header="Nombre tabla" Binding="{Binding Path=f_nombre}" IsReadOnly="{Binding Path=f_ind_es_nuevo}"/>
+                    <DataGridTextColumn Header="Descripcion" Binding="{Binding Path=f_descripcion}"/>
+                    <DataGridCheckBoxColumn Header="Activo GUM" Binding="{Binding Path=f_ind_proceso_gum}" />
+                    <DataGridCheckBoxColumn Header="Con Cambio" Binding="{Binding Path=f_ind_cambio}"  />
+                    <DataGridTextColumn x:Name="Cell_Notas" Header="Notas" Binding="{Binding Path=f_notas}" Width="*"  />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
         <Grid>
-            <Button x:Name="btnAdiccionarTablas" Content="Adicionar Tabla" HorizontalAlignment="Left" Height="21" Margin="10,356,0,-329" Grid.Row="1" VerticalAlignment="Top" Width="126" Click="BtnAdiccionarTablas_Click"/>
-            <Button Content="Exportar" HorizontalAlignment="Left" Height="21" Margin="656,356,0,-327" Grid.Row="1" VerticalAlignment="Top" Width="126"/>
+            <Button x:Name="cmdAdiccionarTablas" Content="Adicionar Tabla" Margin="16,337,0,-300" Click="cmdAdiccionarTablas_Click" HorizontalAlignment="Left" Width="126" Height="21" VerticalAlignment="Top" FontFamily="Avenir Light" FontSize="14" />
+            <Button Content="Exportar" Margin="655,336,0,-297" HorizontalAlignment="Left" Width="126" Height="21" VerticalAlignment="Top" FontFamily="Avenir Light" FontSize="14" />
+            <Button x:Name="cmdAdicionar" Content="Confirmar cambios" Click="CmdAdicionar_Click" Margin="147,338,0,-299" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="126" FontFamily="Avenir Light" FontSize="14"  />
         </Grid>
-        
-        
-
     </Grid>
 
 </Window>

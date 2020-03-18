@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiccionarioTableGUM.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,12 @@ namespace DiccionarioTableGUM.Views
         private void CargarGrid()
         {
 
+            AdicionarTablasModel vObjAdicionarTablasModels = new AdicionarTablasModel();
+            DgTablasDB.ItemsSource = vObjAdicionarTablasModels.ObtenerTablasDB().DefaultView;
 
         }
+
+        
+
     }
 }

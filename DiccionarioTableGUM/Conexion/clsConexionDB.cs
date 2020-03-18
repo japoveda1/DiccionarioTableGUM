@@ -14,23 +14,11 @@ namespace DiccionarioTableGUM.Conexion
 
         private SqlConnection prvSqlConnection;
 
-        private SqlConnection connection;
-        private string server;
-        private string uid;
-        private string password;
-        private string SibiDatabaseName;
-
-        public class conectionReturn
-        {
-            public SqlConnection Connection { get; set; }
-            public bool connected { get; set; }
-        }
-
-        public class ParamsStoreProcedure
+        public class ParametrosSP
         {
             public string ParamName { get; set; }
             public object ParamValue { get; set; }
-            public SqlDbType Type { get; set; }
+            public SqlDbType? Type { get; set; }
         }
 
  
@@ -60,8 +48,8 @@ namespace DiccionarioTableGUM.Conexion
         {
             try
             {
-                connection.Close();
-                connection.Dispose();
+                prvSqlConnection.Close();
+                prvSqlConnection.Dispose();
                 return true;
             }
             catch (Exception ex)
@@ -90,6 +78,56 @@ namespace DiccionarioTableGUM.Conexion
             return vDataSet;
         }
 
+
+        public List<Dictionary<string, object>> EjecutarCommand( string stp_name, List<ParametrosSP> paramsStp)
+        {
+
+            //Create Command
+            SqlCommand vCommand = new SqlCommand
+            {
+                CommandText = stp_name,
+                CommandTimeout = 600,
+                Connection = prvSqlConnection,
+                CommandType = CommandType.StoredProcedure
+            };
+
+            foreach (var item in paramsStp)
+                vCommand.Parameters.Add("@" + item.ParamName, item.Type).Value = item.ParamValue;
+
+            SqlDataReader dataReader = vCommand.ExecuteReader();
+
+            var rows = new List<Dictionary<string, object>>();
+
+            while (dataReader.Read())
+            {
+                var row = new Dictionary<string, object>();
+
+                for (int i = 0; i < dataReader.FieldCount; i++)
+                {
+                    try
+                    {
+                        row.Add(dataReader.GetName(i), dataReader[i]);
+                    }
+                    catch
+                    {
+                        string name = dataReader.GetName(i);
+
+                        row.Add(name, "");
+                    }
+
+                }
+
+                rows.Add(row);
+
+                row = null;
+            }
+
+            dataReader.Close();
+            dataReader.Dispose();
+            vCommand.Dispose();
+
+            return rows;
+        }
 
 
     }
