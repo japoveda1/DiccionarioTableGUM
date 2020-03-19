@@ -25,7 +25,7 @@ namespace DiccionarioTableGUM.Models
             return vDsTablas.Tables[0];
         }
 
-        public void confirmarCambiosGUm(DataTable pvDataTable)
+        public void confirmarCambiosGUm(DataView pvDataView)
         {
             clsConexionDB vObjConexionDB = new clsConexionDB();
             
@@ -34,22 +34,26 @@ namespace DiccionarioTableGUM.Models
 
             vObjConexionDB.AbrirConexion();
 
+            
 
-            for (int IndiceFila = 0; IndiceFila < pvDataTable.Rows.Count; IndiceFila++)
+            foreach (DataRowView vObjRow in pvDataView)
             {
+                
+
                 vParamsUserRolls = new List<clsConexionDB.ParametrosSP>();
                 vParamsUserRolls.Add(new clsConexionDB.ParametrosSP
                 {
                     ParamName = "p_nombre_tabla",
-                    ParamValue = pvDataTable.Rows[IndiceFila]["f_nombre"].ToString(),
+                    ParamValue = vObjRow["f_nombre"].ToString(),
                     Type = System.Data.SqlDbType.VarChar
                 });
 
 
+           
                 vParamsUserRolls.Add(new clsConexionDB.ParametrosSP
                 {
                     ParamName = "p_descripcion_tabla",
-                    ParamValue = pvDataTable.Rows[IndiceFila]["f_descripcion"].ToString(),
+                    ParamValue = vObjRow["f_descripcion"].ToString(),
                     Type = System.Data.SqlDbType.VarChar
                 });
 
@@ -57,7 +61,7 @@ namespace DiccionarioTableGUM.Models
                 vParamsUserRolls.Add(new clsConexionDB.ParametrosSP
                 {
                     ParamName = "p_notas_tabla",
-                    ParamValue = pvDataTable.Rows[IndiceFila]["f_notas"].ToString(),
+                    ParamValue = vObjRow["f_notas"].ToString() , 
                     Type = System.Data.SqlDbType.VarChar
                 });
 
@@ -65,7 +69,7 @@ namespace DiccionarioTableGUM.Models
                 vParamsUserRolls.Add(new clsConexionDB.ParametrosSP
                 {
                     ParamName = "p_ind_proceso_gum",
-                    ParamValue = pvDataTable.Rows[IndiceFila]["f_ind_proceso_gum"].ToString(),
+                    ParamValue = vObjRow["f_ind_proceso_gum"].ToString() ,
                     Type = System.Data.SqlDbType.SmallInt
                 });
 
@@ -77,6 +81,81 @@ namespace DiccionarioTableGUM.Models
             vObjConexionDB.CerrarConexion();
         }
 
+
+        public DataTable ObtenerTablasDB()
+        {
+            clsConexionDB vObjConexionDB = new clsConexionDB();
+
+            vObjConexionDB.AbrirConexion();
+            DataSet vDsTablasDB;
+
+            vDsTablasDB = vObjConexionDB.EjecutarCommand("sp_dd_tablas_db");
+
+            vObjConexionDB.CerrarConexion();
+
+            return vDsTablasDB.Tables[0];
+
+        }
+
+
+        public void AdicionartablasGUM(DataView pvDtvTablasGUM)
+        {
+            //creo la conexion a la base de datos
+            clsConexionDB vObjConexionDB = new clsConexionDB();
+
+            //Objeto donde se van a almacenar los parametros para el sp
+            List<clsConexionDB.ParametrosSP> vParamsUserRolls;
+
+            //abro conexxion
+            vObjConexionDB.AbrirConexion();
+
+            foreach (DataRowView vDrvTabla in pvDtvTablasGUM)
+            {
+
+
+                vParamsUserRolls = new List<clsConexionDB.ParametrosSP>();
+
+                vParamsUserRolls.Add(new clsConexionDB.ParametrosSP
+                {
+                    ParamName = "p_nombre_tabla",
+                    ParamValue = vDrvTabla["f_nombre_tabla"].ToString(),
+                    Type = System.Data.SqlDbType.VarChar
+                });
+
+                var vListSIDocument = vObjConexionDB.EjecutarCommand("sp_dd_insetar_tablas_gum", vParamsUserRolls);
+
+            }
+
+            vObjConexionDB.CerrarConexion();
+        }
+
+
+        public DataTable ObtenerRealaciones(string pvStrNombreTabla)
+        {
+
+            //creo la conexion a la base de datos
+            clsConexionDB vObjConexionDB = new clsConexionDB();
+            vObjConexionDB.AbrirConexion();
+            DataSet vDsRelacionTablas;
+           
+
+            //Objeto donde se van a almacenar los parametros para el sp
+            clsConexionDB.ParametrosSP vParamsUserRolls;
+
+            vParamsUserRolls = new clsConexionDB.ParametrosSP
+            {
+                ParamName = "p_nombre_tabla",
+                ParamValue = pvStrNombreTabla,
+                Type = System.Data.SqlDbType.VarChar
+            };
+
+            vDsRelacionTablas = vObjConexionDB.EjecutarCommand("sp_dd_rel_tabla_gum");
+
+            vObjConexionDB.CerrarConexion();
+
+            return vDsRelacionTablas.Tables[0];
+
+        }
     }
 }
 

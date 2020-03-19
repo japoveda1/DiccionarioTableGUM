@@ -8,7 +8,7 @@
         Title="DiccionarioTablas" Height="450" Width="800">
 
 
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto"/>
@@ -20,20 +20,19 @@
         </Grid>
 
         <Grid  Grid.Row="1" >
-            <DataGrid  x:Name="DgTablas" AutoGenerateColumns="False" CanUserAddRows="False" FontFamily="Avenir Light" FontSize="14" >
+            <DataGrid  x:Name="DgTablas" AutoGenerateColumns="False" CanUserAddRows="False" FontFamily="Avenir Light" FontSize="14" CellEditEnding="DgTablas_CellEditEnding">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nombre tabla" Binding="{Binding Path=f_nombre}" IsReadOnly="{Binding Path=f_ind_es_nuevo}"/>
-                    <DataGridTextColumn Header="Descripcion" Binding="{Binding Path=f_descripcion}"/>
+                    <DataGridTextColumn Header="Nombre tabla" Binding="{Binding Path=f_nombre}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Descripcion" Binding="{Binding Path=f_descripcion}"  />
                     <DataGridCheckBoxColumn Header="Activo GUM" Binding="{Binding Path=f_ind_proceso_gum}" />
-                    <DataGridCheckBoxColumn Header="Con Cambio" Binding="{Binding Path=f_ind_cambio}"  />
                     <DataGridTextColumn x:Name="Cell_Notas" Header="Notas" Binding="{Binding Path=f_notas}" Width="*"  />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Grid>
-            <Button x:Name="cmdAdiccionarTablas" Content="Adicionar Tabla" Margin="16,337,0,-300" Click="cmdAdiccionarTablas_Click" HorizontalAlignment="Left" Width="126" Height="21" VerticalAlignment="Top" FontFamily="Avenir Light" FontSize="14" />
-            <Button Content="Exportar" Margin="655,336,0,-297" HorizontalAlignment="Left" Width="126" Height="21" VerticalAlignment="Top" FontFamily="Avenir Light" FontSize="14" />
-            <Button x:Name="cmdAdicionar" Content="Confirmar cambios" Click="CmdAdicionar_Click" Margin="147,338,0,-299" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="126" FontFamily="Avenir Light" FontSize="14"  />
+        <Grid Grid.Row="1" Margin="0,0,0,10" Grid.RowSpan="2">
+            <Button x:Name="cmdAdiccionarTablas" Content="Adicionar Tabla" Margin="16,337,0,0" Click="cmdAdiccionarTablas_Click" HorizontalAlignment="Left" Width="126" Height="21" VerticalAlignment="Top" FontFamily="Avenir Light" FontSize="14" />
+            <Button Content="Exportar" Margin="655,336,0,0" HorizontalAlignment="Left" Width="126" Height="21" VerticalAlignment="Top" FontFamily="Avenir Light" FontSize="14" />
+            <Button x:Name="cmdConfirmarCambios" Content="Confirmar cambios" Click="CmdConfirmarCambios_Click" Margin="147,338,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="126" FontFamily="Avenir Light" FontSize="14"  />
         </Grid>
     </Grid>
 

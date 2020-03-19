@@ -7,12 +7,38 @@
         mc:Ignorable="d"
         Title="Adicionar Tablas" Height="450" Width="300">
     <Grid Height="419" VerticalAlignment="Bottom" Margin="0,0,2,0">
-        <DataGrid x:Name="DgTablasDB" Margin="10,39,10,17" AutoGenerateColumns="False" >
-            <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{Binding Path=f_seleccion}"/>
-                <DataGridTextColumn Header="Nombre tablas" Binding="{Binding Path=f_nombre_tabla}" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+
+            <CheckBox            
+            Content="Con relacion"
+            HorizontalAlignment="Left"
+            Margin="10,10,0,0"
+            VerticalAlignment="Top"
+            Checked="CheckBox_Checked"
+            Unchecked="CheckBox_Unchecked"
+            IsChecked="True"/>
+
+
+        </Grid>
+        <Grid Grid.Row="1" Width="Auto" >
+            <DataGrid x:Name="DgTablasDB" Margin="10,39,10,17" AutoGenerateColumns="False" CellEditEnding="DgTablasDB_CellEditEnding"  >
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Binding="{Binding Path=f_seleccion}" />
+                    <DataGridTextColumn Header="Nombre tablas" Binding="{Binding Path=f_nombre_tabla}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <Grid Grid.Row="2">
+
+            <Button x:Name="cmdAdiccionarTablas" Content="Adicionar Tabla" Click="CmdAdiccionarTablas_Click"  Width="126" Height="21"  FontFamily="Avenir Light" FontSize="14" />
+
+        </Grid>
 
     </Grid>
 </Window>

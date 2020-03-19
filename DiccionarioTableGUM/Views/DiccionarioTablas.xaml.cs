@@ -25,39 +25,72 @@ namespace DiccionarioTableGUM.Views
 
         public DiccionarioTablas()
         {
-
             InitializeComponent();
-
             CargarGrid();
-
         }
 
         private void cmdAdiccionarTablas_Click(object sender, RoutedEventArgs e)
         {
-            AdicionarTablas frmAdicionarTablas = new AdicionarTablas();
-            frmAdicionarTablas.Show();
+            AbrirVentanaAdicionarTablas();
+            CargarGrid();
+        }
+
+        private void CmdConfirmarCambios_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmarCambios();
+            CargarGrid();
+        }
+
+        private void DgTablas_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            MarcarModificacion(e.Row.GetIndex());
         }
 
         private void CargarGrid()
-        {             
-           DiccionarioTablasModel vObjDiccionarioTablas = new DiccionarioTablasModel();
-           DgTablas.ItemsSource = vObjDiccionarioTablas.obtenerTablasGUM().DefaultView;
+        {
+            DiccionarioTablasModel vObjDiccionarioTablas = new DiccionarioTablasModel();
+
+            //Antes de cargar los nuevos datos se valida si ya hay informacion
+            if (DgTablas.ItemsSource != null)
+            {
+                DgTablas.ItemsSource = null;
+            }
+
+            DgTablas.ItemsSource = vObjDiccionarioTablas.obtenerTablasGUM().DefaultView;
         }
 
-           
-        private void CmdAdicionar_Click(object sender, RoutedEventArgs e)
+        private void AbrirVentanaAdicionarTablas()
+        {
+
+            AdicionarTablas frmAdicionarTablas = new AdicionarTablas();
+            frmAdicionarTablas.Owner = this;
+            frmAdicionarTablas.ShowDialog();
+
+        }
+
+        private void ConfirmarCambios()
         {
             DataView dtvTablasGUM = new DataView();
+            DataView dtvTablasGUMfilter = new DataView();
             DiccionarioTablasModel vObjDiccionarioTablas = new DiccionarioTablasModel();
 
             //Se obtienen los datos que fueron editados en la tabla principal
             dtvTablasGUM = (DataView)DgTablas.ItemsSource;
+            dtvTablasGUM.RowFilter = "f_ind_cambio =1";
 
-            vObjDiccionarioTablas.confirmarCambiosGUm(dtvTablasGUM.Table);
+            vObjDiccionarioTablas.confirmarCambiosGUm(dtvTablasGUM);
+        }
 
-            DgTablas.ItemsSource = null;
-            CargarGrid();
+        
 
+        private void MarcarModificacion(int pvIntIndexRow)
+        {
+            DataView dtvTablasGUM = new DataView();
+            DiccionarioTablasModel vObjDiccionarioTablas = new DiccionarioTablasModel();
+
+            dtvTablasGUM = (DataView)DgTablas.ItemsSource;
+
+            dtvTablasGUM.Table.Rows[pvIntIndexRow]["f_ind_cambio"] = 1;
         }
     }
 }
