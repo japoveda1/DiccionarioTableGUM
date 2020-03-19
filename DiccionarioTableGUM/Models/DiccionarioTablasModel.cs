@@ -41,6 +41,7 @@ namespace DiccionarioTableGUM.Models
                 
 
                 vParamsUserRolls = new List<clsConexionDB.ParametrosSP>();
+
                 vParamsUserRolls.Add(new clsConexionDB.ParametrosSP
                 {
                     ParamName = "p_nombre_tabla",
@@ -137,19 +138,22 @@ namespace DiccionarioTableGUM.Models
             clsConexionDB vObjConexionDB = new clsConexionDB();
             vObjConexionDB.AbrirConexion();
             DataSet vDsRelacionTablas;
-           
 
-            //Objeto donde se van a almacenar los parametros para el sp
-            clsConexionDB.ParametrosSP vParamsUserRolls;
+            List<clsConexionDB.ParametrosSP> vParamsUserRolls;
 
-            vParamsUserRolls = new clsConexionDB.ParametrosSP
+
+            vParamsUserRolls = new List<clsConexionDB.ParametrosSP>();
+
+            vParamsUserRolls.Add(new clsConexionDB.ParametrosSP
             {
                 ParamName = "p_nombre_tabla",
                 ParamValue = pvStrNombreTabla,
                 Type = System.Data.SqlDbType.VarChar
-            };
+            });
 
-            vDsRelacionTablas = vObjConexionDB.EjecutarCommand("sp_dd_rel_tabla_gum");
+            
+
+            vDsRelacionTablas = vObjConexionDB.EjecutarCommand("sp_dd_rel_tabla_gum", vParamsUserRolls);
 
             vObjConexionDB.CerrarConexion();
 

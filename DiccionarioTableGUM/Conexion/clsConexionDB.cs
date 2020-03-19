@@ -79,8 +79,9 @@ namespace DiccionarioTableGUM.Conexion
         }
 
 
-        public List<Dictionary<string, object>> EjecutarCommand( string stp_name, List<ParametrosSP> paramsStp)
+        public DataSet EjecutarCommand( string stp_name, List<ParametrosSP> paramsStp)
         {
+            DataSet vDataSet = new DataSet();
 
             //Create Command
             SqlCommand vCommand = new SqlCommand
@@ -94,39 +95,63 @@ namespace DiccionarioTableGUM.Conexion
             foreach (var item in paramsStp)
                 vCommand.Parameters.Add("@" + item.ParamName, item.Type).Value = item.ParamValue;
 
-            SqlDataReader dataReader = vCommand.ExecuteReader();
+            //SqlDataReader dataReader = vCommand.ExecuteReader();
 
-            var rows = new List<Dictionary<string, object>>();
-
-            while (dataReader.Read())
+            using (SqlDataReader dataReader = vCommand.ExecuteReader())
             {
-                var row = new Dictionary<string, object>();
+                //Create a new DataSet.
+                DataSet dsCustomers = new DataSet();
+                vDataSet.Tables.Add("Customers");
 
-                for (int i = 0; i < dataReader.FieldCount; i++)
-                {
-                    try
-                    {
-                        row.Add(dataReader.GetName(i), dataReader[i]);
-                    }
-                    catch
-                    {
-                        string name = dataReader.GetName(i);
-
-                        row.Add(name, "");
-                    }
-
-                }
-
-                rows.Add(row);
-
-                row = null;
+                //Load DataReader into the DataTable.
+                vDataSet.Tables[0].Load(dataReader);
             }
 
-            dataReader.Close();
-            dataReader.Dispose();
+
+            //var rows = new List<Dictionary<string, object>>();
+
+            //while (dataReader.Read())
+            //{
+            //    var row = new Dictionary<string, object>();
+
+            //    for (int i = 0; i < dataReader.FieldCount; i++)
+            //    {
+            //        try
+            //        {
+            //            row.Add(dataReader.GetName(i), dataReader[i]);
+            //            vDataSet.Tables.Add(dataReader.GetName(i));
+            //            vDataSet.Tables[0].Load(dataReader);
+
+            //        }
+            //        catch
+            //        {
+            //            string name = dataReader.GetName(i);
+
+            //            //row.Add(name, "");
+            //            vDataSet.Tables.Add(name);
+            //            //vDataSet.Tables[0].Load(dataReader);
+            //        }
+
+            //    }
+
+
+            //    //rows.Add(row);
+
+            //    //row = null;
+            //}
+
+            //vDataSet.Tables.Add("table");
+
+            //vDataSet.Tables[0].Load(dataReader);
+
+
+            //dataReader.Close();
+            //dataReader.Dispose();
             vCommand.Dispose();
 
-            return rows;
+           
+
+            return vDataSet;
         }
 
 

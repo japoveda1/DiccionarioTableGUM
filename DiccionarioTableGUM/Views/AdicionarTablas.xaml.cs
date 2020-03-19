@@ -30,20 +30,7 @@ namespace DiccionarioTableGUM.Views
            
         }
 
-        private void CargarGrid()
-        {
 
-            DiccionarioTablasModel vObjDiccionarioTablas = new DiccionarioTablasModel();
-
-            //Antes de cargar los nuevos datos se valida si ya hay informacion
-            if (DgTablasDB.ItemsSource != null)
-            {
-                DgTablasDB.ItemsSource = null;
-            }
-
-            DgTablasDB.ItemsSource = vObjDiccionarioTablas.ObtenerTablasDB().DefaultView;
-
-        }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
@@ -65,17 +52,81 @@ namespace DiccionarioTableGUM.Views
 
         private void DgTablasDB_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            ObtenerRelaciones(e.Row.GetIndex());
-        }
-
-        private void ObtenerRelaciones(int pvindexRow)
-        {
             DataView dtvTablasDB = new DataView();
+            DataTable dtTablasRelacionadas = new DataTable();
+            int vIntIndexRow;
+            string vStrSeleccion;
+
             DiccionarioTablasModel vObjDiccionarioTablas = new DiccionarioTablasModel();
 
             dtvTablasDB = (DataView)DgTablasDB.ItemsSource;
+            vIntIndexRow = e.Row.GetIndex();
+                vStrSeleccion =  dtvTablasDB.Table.Rows[vIntIndexRow]["f_seleccion"].ToString();
+            var a  =DgTablasDB.CurrentColumn;
+                if (prvIntIndConRelacion == 1  )
+            {
+               MarcarTablasRelacionadas(vIntIndexRow, dtvTablasDB);
 
-            vObjDiccionarioTablas.ObtenerRealaciones(dtvTablasDB.Table.Rows[pvindexRow]["f_nombre_tabla"].ToString());
+            }
+        }
+
+        private void CargarGrid()
+        {
+
+            DiccionarioTablasModel vObjDiccionarioTablas = new DiccionarioTablasModel();
+
+            //Antes de cargar los nuevos datos se valida si ya hay informacion
+            if (DgTablasDB.ItemsSource != null)
+            {
+                DgTablasDB.ItemsSource = null;
+            }
+
+            DgTablasDB.ItemsSource = vObjDiccionarioTablas.ObtenerTablasDB().DefaultView;
+
+        }
+
+
+
+
+        private void MarcarTablasRelacionadas(int pvindexRow,DataView pvDtvTablas)
+        {
+            //DataView dtvTablasDB = new DataView();
+            DataTable dtTablasRelacionadas = new DataTable();
+            
+            DiccionarioTablasModel vObjDiccionarioTablas = new DiccionarioTablasModel();
+        
+            dtTablasRelacionadas = vObjDiccionarioTablas.ObtenerRealaciones(pvDtvTablas.Table.Rows[pvindexRow]["f_nombre_tabla"].ToString());
+
+            
+             foreach (DataRow dtRowTabla in dtTablasRelacionadas.Rows)
+             {
+                /*string filter = "f_nombre_tabla = '" + dtRowTabla["f_nombre_tabla_ref"].ToString()+"'";
+
+                foreach (DataRowView vObjRow in pvDtvTablas)
+                {
+                    if (vObjRow["f_nombre_tabla"].ToString() == dtRowTabla["f_nombre_tabla_ref"].ToString())
+                    {
+
+
+                        vObjRow["f_seleccion"] = 1;
+                    }
+
+
+                }*/
+
+
+
+                (from p in pvDtvTablas.Table.AsEnumerable()
+                 where p.Field<string>("f_nombre_tabla") == dtRowTabla["f_nombre_tabla_ref"].ToString()
+                 select p).ToList().ForEach(x => x["f_seleccion"] = 1);
+
+            }
+
+      
+            /*
+            from contact in contacts.AsEnumerable()
+            where SoundEx(contact.Field<string>("LastName")) == soundExCode
+            select contact;*/
         }
 
         private void AdicionarTablasGum() {
@@ -94,6 +145,7 @@ namespace DiccionarioTableGUM.Views
 
         }
 
+        
 
     }
 }
