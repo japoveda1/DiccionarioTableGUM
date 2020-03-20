@@ -74,11 +74,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Conexion\clsConexionDB.cs" />
+    <Compile Include="Views\ModificarCampos.xaml.cs">
+      <DependentUpon>ModificarCampos.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\AdicionarTablas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DiccionarioTablas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModificarCampos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

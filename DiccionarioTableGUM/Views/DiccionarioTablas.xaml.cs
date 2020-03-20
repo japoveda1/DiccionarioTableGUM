@@ -92,5 +92,10 @@ namespace DiccionarioTableGUM.Views
 
             dtvTablasGUM.Table.Rows[pvIntIndexRow]["f_ind_cambio"] = 1;
         }
+
+        private void CmdCampo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

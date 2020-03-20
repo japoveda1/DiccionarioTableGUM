@@ -29,9 +29,7 @@ namespace DiccionarioTableGUM.Views
             CargarGrid();
            
         }
-
-
-
+               
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             prvIntIndConRelacion = 1;
@@ -100,33 +98,11 @@ namespace DiccionarioTableGUM.Views
             
              foreach (DataRow dtRowTabla in dtTablasRelacionadas.Rows)
              {
-                /*string filter = "f_nombre_tabla = '" + dtRowTabla["f_nombre_tabla_ref"].ToString()+"'";
-
-                foreach (DataRowView vObjRow in pvDtvTablas)
-                {
-                    if (vObjRow["f_nombre_tabla"].ToString() == dtRowTabla["f_nombre_tabla_ref"].ToString())
-                    {
-
-
-                        vObjRow["f_seleccion"] = 1;
-                    }
-
-
-                }*/
-
-
-
                 (from p in pvDtvTablas.Table.AsEnumerable()
                  where p.Field<string>("f_nombre_tabla") == dtRowTabla["f_nombre_tabla_ref"].ToString()
                  select p).ToList().ForEach(x => x["f_seleccion"] = 1);
+             }
 
-            }
-
-      
-            /*
-            from contact in contacts.AsEnumerable()
-            where SoundEx(contact.Field<string>("LastName")) == soundExCode
-            select contact;*/
         }
 
         private void AdicionarTablasGum() {
@@ -145,7 +121,17 @@ namespace DiccionarioTableGUM.Views
 
         }
 
-        
+        private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
+        {
 
+            
+
+        }
+
+       
+        private void CheckBox_Unchecked_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

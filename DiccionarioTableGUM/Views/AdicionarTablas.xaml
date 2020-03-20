@@ -28,6 +28,15 @@
         <Grid Grid.Row="1" Width="Auto" >
             <DataGrid x:Name="DgTablasDB" Margin="10,39,10,17" AutoGenerateColumns="False" CellEditEnding="DgTablasDB_CellEditEnding"  >
                 <DataGrid.Columns>
+
+
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox Unchecked="CheckBox_Unchecked_1" Checked="CheckBox_Checked_1"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridCheckBoxColumn Binding="{Binding Path=f_seleccion}"  />
                     <DataGridTextColumn Header="Nombre tablas" Binding="{Binding Path=f_nombre_tabla}" Width="*" IsReadOnly="True" />
                 </DataGrid.Columns>

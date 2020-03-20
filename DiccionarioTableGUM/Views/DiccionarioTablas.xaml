@@ -26,6 +26,13 @@
                     <DataGridTextColumn Header="Descripcion" Binding="{Binding Path=f_descripcion}"  />
                     <DataGridCheckBoxColumn Header="Activo GUM" Binding="{Binding Path=f_ind_proceso_gum}" />
                     <DataGridTextColumn x:Name="Cell_Notas" Header="Notas" Binding="{Binding Path=f_notas}" Width="*"  />
+                    <DataGridTemplateColumn Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="cmdCampo" Content="Campos" Click="CmdCampo_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
